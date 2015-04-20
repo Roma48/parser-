@@ -1,0 +1,5 @@
+name = Calendar Parser
+description = Homepage block Calendar
+package = Calendar
+core = 7.x
+files[] = parser.module
