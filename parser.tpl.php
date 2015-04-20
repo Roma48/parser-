@@ -1,27 +1,29 @@
 <h2>Calendar</h2>
 
 
-<?php foreach($rss->channel->item as $item) {?>
-<<<<<<< HEAD
+<?php
+    $i=0;
+    foreach($rss->channel->item as $item) {?>
+
+    <?php if($i < 4):?>
     <?php $text = substr($item->title, 0, 10);
-    date_default_timezone_set("America/Sao_Paulo");
-    $date = strtotime($text);
-    $now = strtotime("now");
-    ?>
-<!--    --><?php //if($now == $date): ?>
+
+    $date = new DateTime($text);
+    $now = new DateTime("now");
+
+    if($date->getTimestamp() >= $now->getTimestamp()):?>
+
 
 
     <div>
         <?php
-                $month = date('M', $date);
-                $day = date('d', $date);
-        echo $month;
-        echo $day;
-
-        ?>
+                $date_event = strtotime($text);
+                $month = date('M', $date_event);
+                $day = date('d', $date_event); ?>
+        <span><?php print ($month); ?></span>
+        <span><?php print ($day); ?></span>
     </div>
-=======
->>>>>>> ec2378b2f17fcfc559d35c1b9feb41221f96dc58
+
     <div>
         <span style="font-weight: bold"><?php print $item->title; ?></span>
         <p>
@@ -29,8 +31,8 @@
         </p>
         <a href="<?php print $item->link; ?>">Read more</a>
     </div>
-<<<<<<< HEAD
-<!--        --><?php //endif; ?>
-=======
->>>>>>> ec2378b2f17fcfc559d35c1b9feb41221f96dc58
+
+<?php  $i++; endif; ?>
+
+            <?php  endif; ?>
 <?php } ?>
