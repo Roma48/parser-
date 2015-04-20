@@ -1,0 +1,35 @@
+<?php
+
+function parser_block_info() {
+    $blocks[ 'parser' ] = array(
+        'info' => "Calendar"
+    );
+    return $blocks;
+}
+
+function parser_block_view( $delta = '' ) {
+    switch ($delta) {
+        case 'parser':
+            $block[ 'content' ] = parser_block();
+            break;
+    }
+    return $block;
+}
+
+function parser_block() {
+
+    $rss = simplexml_load_file( 'http://kilgorechamber.chambermaster.com/Feed/rss/UpcomingEvents.rss' );
+
+    $output = theme( 'parser', array( 'rss' => $rss ) );
+    return $output;
+
+}
+
+function parser_theme() {
+    return array(
+        'parser' => array(
+            'template'  =>  'parser',
+            'variables' =>  ''
+        )
+    );
+}
